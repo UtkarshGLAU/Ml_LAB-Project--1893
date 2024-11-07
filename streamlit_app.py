@@ -29,6 +29,7 @@ distance_nose_to_lip_long = 1 if distance_nose_to_lip_long == "Yes" else 0
 
 def predict():
     prediction = model.predict([[long_hair, forehead_width_cm, forehead_height_cm, nose_wide, nose_long, lips_thin, distance_nose_to_lip_long]])[0]
+    st.write(prediction)
     if prediction == 1:
         st.success("Male")
     else:
