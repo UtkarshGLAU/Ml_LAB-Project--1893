@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-st.title("Gender Classification Using Machine Learning")
+st.title("Gender Classification Using Machine Learning Web App")
 
 model = pickle.load(open('model.pkl','rb'))
 
