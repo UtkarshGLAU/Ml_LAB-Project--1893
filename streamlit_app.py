@@ -1,16 +1,10 @@
 import streamlit as st
+import pandas as pd
+import pickle
+
 st.title("Gender Classification Using Machine Learning")
 
-import pandas as pd
-from sklearn.naive_bayes import GaussianNB
-
-data = pd.read_csv('./gender_classification_v7.csv')
-data['gender'] = data['gender'].map({'Male': 1, 'Female': 0})
-X = data.drop('gender', axis=1)
-y = data['gender']
-
-gnb = GaussianNB()
-gnb.fit(X, y)
+model = pickle.load(open('model.pkl','rb'))
 
 st.info("Please enter the following details to get the prediction")
 
@@ -34,11 +28,10 @@ distance_nose_to_lip_long = st.radio("Is the distance between your nose and lip 
 distance_nose_to_lip_long = 1 if distance_nose_to_lip_long == "Yes" else 0
 
 def predict():
-    prediction = gnb.predict([[long_hair, forehead_width_cm, forehead_height_cm, nose_wide, nose_long, lips_thin, distance_nose_to_lip_long]])[0]
+    prediction = model.predict([[long_hair, forehead_width_cm, forehead_height_cm, nose_wide, nose_long, lips_thin, distance_nose_to_lip_long]])[0]
     if prediction == 1:
         st.success("Male")
     else:
         st.success("Female")
 
 st.button("Predict", on_click=predict)
-
