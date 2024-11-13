@@ -1,11 +1,9 @@
 import streamlit as st
-import pandas as pd
 import pickle
 
 st.title("Gender Classification Using Machine Learning Web App")
-
-model = pickle.load(open('model.pkl','rb'))
-
+x = st.radio("Select your MODEL", ("VotingRegression.pkl", "GaussianNB.pkl"))
+model = pickle.load(open(x,'rb'))
 st.info("Please enter the following details to get the prediction")
 
 long_hair = st.radio("Do you have long hair?", ("No", "Yes"))
